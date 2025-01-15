@@ -1,0 +1,27 @@
+views:
+  - name: hotel_click_booking_location_hierarchy
+    description: "This metric calculates the hotel click booking based on location hierarchy by customers within a given time period."
+    public: true
+    meta:
+      title: Hotel Booking Based On Location Hierarchy
+      tags:
+        - DPDomain.Analysis
+        - DPDomain.Hotel Booking
+        - DPDomain.Location Hierarchy
+    metric:
+      expression: "*/45 * * * *"
+      timezone: "UTC"
+      window: "day"
+    tables:
+      - join_path: Hotel_Click_Booking_table
+        prefix: true
+        includes:
+          - location_id
+          - geo_id
+          - ds
+      - join_path: Location_Hierarchy
+        prefix: true
+        includes:
+          - location_id
+          - geo_id
+          - ds

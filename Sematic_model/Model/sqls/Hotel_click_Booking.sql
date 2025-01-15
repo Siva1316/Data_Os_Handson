@@ -1,0 +1,10 @@
+SELECT
+    location_id,
+    geo_id,
+    booking_id,
+    advertiser_id,
+    campaign_id,
+    user_id,
+    ds
+FROM 
+    lakehouse.siva.hotel_click_booking;

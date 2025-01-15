@@ -1,0 +1,45 @@
+tables:
+  - name: hotel_click_booking
+    sql: Sematic_model/sqls/Hotel_click_Booking.sql
+    description: "This table stores key details about the customers' hotel bookings."
+    public: true
+
+    joins:
+      - name: location_hierarchy
+        relationship: one_to_one
+        sql: >
+          {TABLE.location_id} = {location_hierarchy.location_id} 
+          AND {TABLE.geo_id} = {location_hierarchy.geo_id} 
+          AND {TABLE.ds} = {location_hierarchy.ds}
+
+    dimensions:
+      - name: location_id
+        type: number
+        column: location_id
+        description: "The unique identifier for the location of the booking, used for geographic analysis."
+
+      - name: geo_id
+        type: number
+        column: geo_id
+        description: "The geographic identifier associated with the booking, used for regional segmentation and analytics."
+
+      - name: ds
+        type: date
+        column: ds
+        description: "The date of the booking, used for time-series analysis and reporting."
+
+    measures:
+      - name: total_bookings
+        sql: "COUNT(*)"
+        type: number
+        description: "The total number of bookings in the dataset."
+
+      - name: unique_locations
+        sql: "COUNT(DISTINCT {location_id})"
+        type: number
+        description: "The number of unique locations where bookings occurred."
+
+      - name: unique_geos
+        sql: "COUNT(DISTINCT {geo_id})"
+        type: number
+        description: "The number of unique geographic regions for bookings."

@@ -1,0 +1,36 @@
+version: "2.2"
+
+x-lens2-environment: &lens2-environment
+  # DataOS
+  DATAOS_FQDN: ${DATAOS-CONTEXT.dataos.app} 
+  # Overview
+  LENS2_NAME: "Hotel Booking"
+  LENS2_DESCRIPTION: "This Lens provides hotel bookings based on hotel click booking, location hirechary and Vm user location "
+  LENS2_TAGS: "hotel booking, vm user, loc hierarchy "
+  LENS2_AUTHORS: "siva"
+  LENS2_SOURCE_TYPE: "minerva"
+  LENS2_SOURCE_NAME: "hotel_booking"
+  LENS2_SOURCE_CATALOG_NAME: "icebase"
+  DATAOS_RUN_AS_APIKEY: ""
+  # Log
+  LENS2_LOG_LEVEL: error
+  CACHE_LOG_LEVEL: "error"
+  # Operation
+  LENS2_DEV_MODE: true   
+  LENS2_REFRESH_WORKER: true
+  LENS2_SCHEMA_PATH: model
+  LENS2_PG_SQL_PORT: 5432
+  CUBESTORE_DATA_DIR: "/var/work/.store"
+
+services:
+  api:
+    restart: always
+    image: rubiklabs/lens2:0.35.60-8
+    ports:
+      - 4000:4000
+      - 25432:5432
+      - 13306:13306
+    environment:
+      <<: *lens2-environment   
+    volumes:
+      - ./model:/etc/dataos/work/model
