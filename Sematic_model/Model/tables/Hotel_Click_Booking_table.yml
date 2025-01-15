@@ -1,6 +1,6 @@
 tables:
   - name: hotel_click_booking
-    sql: Sematic_model/sqls/Hotel_click_Booking.sql
+    sql: {{ load_sql('Hotel_click_Booking') }}
     description: "This table stores key details about the customers' hotel bookings."
     public: true
 
@@ -24,7 +24,7 @@ tables:
         description: "The geographic identifier associated with the booking, used for regional segmentation and analytics."
 
       - name: ds
-        type: date
+        type: string
         column: ds
         description: "The date of the booking, used for time-series analysis and reporting."
 

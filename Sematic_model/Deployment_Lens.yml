@@ -1,6 +1,6 @@
 # RESOURCE META SECTION
 name: siva-model-lens # Lens Resource name (mandatory)
-version: v1alpha # Lens manifest version (mandatory)
+version: v1 # Lens manifest version (mandatory)
 layer: user # DataOS Layer (optional)
 type: lens # Type of Resource (mandatory)
 tags: # Tags (optional)
@@ -17,12 +17,14 @@ lens:
 
 # Data Source configuration      
   source: 
-    type: depot # Source type (could be themis, minerva flash as well)
-    name: lakehouse # Source name (name of the depot)
+    type: minerva # Source type (could be themis, minerva flash as well)
+    name: miniature # Source name (name of the depot)
     catalog: lakehouse # Catalog name for the depot
+    
   repo: # Lens model code repository configuration (mandatory)
-    url: https://github.com/Siva1316/Data_Os_deployment # URL of repository containing the Lens model (mandatory)
-    lensBaseDir: Data_Os_deployment/Data_OS_Hands_On/Sematic_model/Model # Relative path of the Lens 'model' directory in repository (mandatory)
+    type: git # Added repository type
+    url: https://github.com/Siva1316/Data_Os_Handson # URL of repository containing the Lens model (mandatory)
+    lensBaseDir: Data_Os_Handson/Sematic_model/Model # Relative path of the Lens 'model' directory in repository (mandatory)
     syncFlags: # Additional flags used during synchronization (optional)
       - --ref=main # Repository Branch (optional)
 
@@ -36,7 +38,7 @@ lens:
         memory: 256Mi
       limits:
         cpu: 1000m
-        memory: 1048Mi
+        memory: 1024Mi # Fixed memory unit
 
 # Worker configuration
   worker:  #(optional)
@@ -51,7 +53,6 @@ lens:
         memory: 1248Mi
 
 # Router configuration
-
   router:  #(optional)
     logLevel: info # Level of log detail for Router (optional)
     resources: # CPU and memory resource specifications for the router (optional)
@@ -60,18 +61,18 @@ lens:
         memory: 256Mi
       limits:
         cpu: 1000m
-        memory: 2548Mi
+        memory: 2048Mi # Fixed memory unit
 
 # Iris configuration 
-  iris: #(optional)
-    logLevel: info # Log level for Iris (optional)
-    resources: # CPU and memory resource specifications for the iris board (optional)
-      requests:
-        cpu: 200m
-        memory: 256Mi
-      limits:
-        cpu: 1600m
-        memory: 2240Mi
+#  iris: #(optional)
+#    logLevel: info # Log level for Iris (optional)
+#    resources: # CPU and memory resource specifications for the iris board (optional)
+#      requests:
+#        cpu: 200m
+#        memory: 256Mi
+#      limits:
+#       cpu: 1600m
+#        memory: 2240Mi
 # Metric configuration 
-  metric:                         #(optional)
-    logLevel: info # Log level for metrics (optional)
+# metric:                         #(optional)
+#   logLevel: info # Log level for metrics (optional)

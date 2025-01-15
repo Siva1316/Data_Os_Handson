@@ -1,6 +1,6 @@
 tables:
   - name: booking_data
-    sql: Sematic_model/sqls/VM_User_location.sql
+    sql: {{ load_sql('VM_User_location') }}
     description: "This table stores booking data information."
     public: true
 
@@ -38,7 +38,7 @@ tables:
         description: "The unique identifier for the user associated with the booking."
 
       - name: ds
-        type: date
+        type: string
         column: ds
         description: "The date of the booking, used for time-series analysis."
 

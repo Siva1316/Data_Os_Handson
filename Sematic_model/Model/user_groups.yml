@@ -1,4 +1,9 @@
 user_groups:
   - name: default
-    description: this is default user group
+    api_scopes:
+      - meta
+      - data
+      - graphql
+      - jobs
+      - source
     includes: "*"
