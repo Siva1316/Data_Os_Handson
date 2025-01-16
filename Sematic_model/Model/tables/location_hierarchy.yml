@@ -1,14 +1,8 @@
 tables:
-  - name: hotel_click_booking
-    sql: {{ load_sql('Hotel_click_Booking') }}
+  - name: location_hiery
+    sql: {{ load_sql('Location_Hiery') }}
     description: "This table stores key details about the customers' hotel bookings."
     public: true
-
-    joins:
-      - name: location_hiery
-        relationship: many_to_one
-        sql: >
-          {TABLE.location_id} = {location_hiery.location_id} 
 
     dimensions:
       - name: location_id
@@ -31,13 +25,3 @@ tables:
         sql: "COUNT(*)"
         type: number
         description: "The total number of bookings in the dataset."
-
-      - name: unique_locations
-        sql: "COUNT(DISTINCT {location_id})"
-        type: number
-        description: "The number of unique locations where bookings occurred."
-
-      - name: unique_geos
-        sql: "COUNT(DISTINCT {geo_id})"
-        type: number
-        description: "The number of unique geographic regions for bookings."
