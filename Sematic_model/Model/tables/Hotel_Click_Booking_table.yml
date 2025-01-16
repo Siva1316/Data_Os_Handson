@@ -8,7 +8,7 @@ tables:
       - name: hotel_booking
         relationship: many_to_one
         sql: >
-          "{TABLE.location_id} = {hotel_booking.location_id}""
+          "{TABLE.location_id} = {hotel_booking.location_id}"
 
     dimensions:
       - name: booking_id
