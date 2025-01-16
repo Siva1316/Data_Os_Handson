@@ -4,7 +4,6 @@ tables:
     description: "This table stores key details about the customers' hotel bookings."
     public: true
     
-    primary_key: booking_id
     joins:
       - name: hotel_booking
         relationship: many_to_one
@@ -13,7 +12,7 @@ tables:
 
     dimensions:
       - name: booking_id
-        type: string
+        type: number
         column: booking_id
         description: "Unique identifier for each booking."
         primary_key: true
