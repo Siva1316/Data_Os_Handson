@@ -4,6 +4,7 @@ tables:
     description: "This table stores key details about the customers' hotel bookings."
     public: true
 
+    
     dimensions:
       - name: location_id
         type: number
@@ -14,7 +15,8 @@ tables:
         type: number
         column: geo_id
         description: "The geographic identifier associated with the booking, used for regional segmentation and analytics."
-
+        primary_key: true
+        
       - name: ds
         type: string
         column: ds
