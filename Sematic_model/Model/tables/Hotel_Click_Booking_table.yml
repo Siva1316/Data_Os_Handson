@@ -8,7 +8,7 @@ tables:
       - name: location_hierarchy
         relationship: many_to_one
         sql: >
-          {TABLE.location_id} = {location_hierarchy.location_id} 
+          {TABLE.location_id} = {location_hierarchy.location_id}
 
     dimensions:
       - name: booking_id

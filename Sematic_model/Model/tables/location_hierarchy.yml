@@ -4,6 +4,9 @@ tables:
     description: "This table stores key details about the customers' hotel bookings."
     public: true
 
+    # Define the primary key for the table
+    primary_key: location_id
+
     dimensions:
       - name: location_id
         type: number
