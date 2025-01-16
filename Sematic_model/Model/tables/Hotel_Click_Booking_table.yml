@@ -3,7 +3,8 @@ tables:
     sql: {{ load_sql('Hotel_click_Booking') }}
     description: "This table stores key details about the customers' hotel bookings."
     public: true
-
+    
+    primary_key: booking_id
     joins:
       - name: hotel_booking
         relationship: many_to_one
