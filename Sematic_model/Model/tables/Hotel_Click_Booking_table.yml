@@ -4,6 +4,9 @@ tables:
     description: "This table stores key details about the customers' hotel bookings."
     public: true
 
+    # Adding primary key
+    primary_key: booking_id
+
     joins:
       - name: location_hierarchy
         relationship: many_to_one
@@ -11,6 +14,11 @@ tables:
           {TABLE.location_id} = {location_hierarchy.location_id} 
 
     dimensions:
+      - name: booking_id
+        type: number
+        column: booking_id
+        description: "The unique identifier for each booking. Used as the primary key."
+
       - name: location_id
         type: number
         column: location_id
