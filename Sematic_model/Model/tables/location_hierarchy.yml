@@ -1,10 +1,10 @@
 tables:
-  - name: location_hierarchy
+  - name: hotel_booking
     sql: {{ load_sql('Location_Hiery') }}
     description: "This table stores key details about the customers' hotel bookings."
     public: true
 
-    primary_key: location_id
+    
 
     dimensions:
       - name: location_id
