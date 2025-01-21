@@ -1,0 +1,86 @@
+name: siva-hbc-qualitycheck
+version: v1
+type: workflow
+tags:
+  - workflow
+  - soda-checks
+description: Applying quality checks for the customer data
+workspace: public
+workflow:
+  # schedule:
+  #   cron: '00 08 * * *'
+  #  # endOn: '2023-12-12T22:00:00Z'
+  #   concurrencyPolicy: Forbid
+  dag:
+    - name: soda-siva-quality
+      spec:
+        stack: soda+python:1.0
+        compute: runnable-default
+        resources:
+          requests:
+            cpu: 1000m
+            memory: 250Mi
+          limits:
+            cpu: 1000m
+            memory: 250Mi
+        logLevel: INFO # WARNING, ERROR, DEBUG
+        stackSpec:
+          inputs:
+            - dataset: dataos://lakehouse:siva/hotel_click_booking
+              options:
+                engine: minerva
+                clusterName: miniature
+              checks:  
+                - schema:
+                    name: Data type validation for table columns
+                    fail:
+                      when wrong column type:
+                        location_id: text
+                        geo_id: text
+                        booking_id: bigint
+                        advertiser_id: text
+                        campaign_id: text
+                        user_id: text
+                        ds: date
+                    attributes:
+                      category: Schema
+
+                - missing_count(location_id) = 0:
+                    name: No missing values in location_id
+                    attributes:
+                      category: Completeness
+
+                - missing_count(geo_id) = 0:
+                    name: No missing values in geo_id
+                    attributes:
+                      category: Completeness
+
+                - missing_count(booking_id) = 0:
+                    name: No missing values in booking_id
+                    attributes:
+                      category: Completeness
+
+                - duplicate_count(booking_id) = 0:
+                    name: Booking ID should not be duplicated
+                    attributes:
+                      category: Uniqueness
+
+                - missing_count(advertiser_id) = 0:
+                    name: No missing values in advertiser_id
+                    attributes:
+                      category: Completeness
+
+                - missing_count(campaign_id) = 0:
+                    name: No missing values in campaign_id
+                    attributes:
+                      category: Completeness
+
+                - missing_count(user_id) = 0:
+                    name: No missing values in user_id
+                    attributes:
+                      category: Completeness
+
+                - min(ds) >= '2000-01-01':
+                    name: Date values in 'ds' must be valid and after 2000-01-01
+                    attributes:
+                      category: Validity

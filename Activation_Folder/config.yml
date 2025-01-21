@@ -1,0 +1,24 @@
+# config.yaml
+name: data_siva-handson_api
+description: An api for sending hotel booking recommendations. 
+version: 0.1.19-dev
+auth:
+  heimdallUrl: https://splendid-shrew.dataos.app/heimdall
+  userGroups:
+  - name : datadev
+    description: data dev group
+    includes:
+      - users:id:iamgroot
+      - users:id:thor
+  - name: default
+    description: Default group to accept everyone
+    includes: "*"
+logLevel: 'DEBUG' 
+cachePath: tmp
+sources:
+  - name: lens # profile name
+    type: lens
+    lensName: 'public:cross-sell-affinity'
+metrics:
+  type: summary
+  percentiles: [ 0.5, 0.75, 0.95, 0.98, 0.99, 0.999 ]
